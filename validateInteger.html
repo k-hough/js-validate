@@ -1,0 +1,61 @@
+<!--Generate the HTML for a link that opens in a separate browser tab. The attribute values of the link should be in double quotes. Generate the link 2 different ways. First, use double quoted strings with embedded double quotes, then use single quoted strings with embedded double quotes.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Exercise</title>
+</head>
+<body>
+
+    <form>
+        <label for="input-int">Enter a integer between 1 and 10</label>
+        <input type="text" name="input-int" id="input-int">
+        <button type="button" value="submit" id="submit">Submit</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+    "use strict";
+
+    var $ = function(id) { return document.getElementById(id); };
+
+    var captureDisplay = function() {
+        var input = $("input-int").value;
+        $("output").innerHTML = validate(input);
+    };
+
+    var validate = function(input) {
+        var answer = "";
+        if (input === "") {
+            answer = "Please enter an integer between 1 and 10";
+        }
+        else {
+            input = parseInt(input);
+            if (isNaN(input)) {
+                answer = "Please enter an integer between 1 and 10";
+            }
+            else if (Number.isInteger(input)) {
+                if (input >= 1 && input <= 10) {
+                    answer = "The integer is between 1 and 10";
+                }
+                else {
+                    answer = "The integer is not bewteen 1 and 10";
+                }
+            }
+            else {
+                answer = "Enter an integer";
+            }
+        }
+        return answer;
+    };
+
+    window.onload = function() {
+        $("submit").onclick = captureDisplay;
+    };
+
+    </script>
+
+</body>
+</html>
