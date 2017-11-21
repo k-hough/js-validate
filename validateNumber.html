@@ -1,0 +1,58 @@
+<!--Create a form with 2 labels, 2 textboxes (type="text", not type="number"), and a button. The labels should ask the user to enter a number. When the user clicks the button, first verify that the user entered numbers in both textboxes. If they entered numbers, divide the first number by the second number and display the result to the nearest hundredth. Also display a message if the second number is 0.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Exercise</title>
+</head>
+<body>
+
+    <form>
+        <label for="input-num1">Enter a number</label>
+        <input type="text" name="input-num1" id="input-num1">
+        <label for="input-num2">Enter a number</label>
+        <input type="text" name="input-num2" id="input-num2">
+        <button type="button" value="submit" id="submit">Submit</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+    "use strict";
+
+    var $ = function(id) { return document.getElementById(id); };
+
+    var captureDisplay = function() {
+        var input1 = $("input-num1").value;
+        var input2 = $("input-num2").value;
+        $("output").innerHTML = validate(input1, input2);
+    };
+
+    var validate = function(input1, divisor) {
+        var answer;
+        if (input1 === "" || divisor ==="") {
+            answer = "Please enter a number into each field";
+        }
+        else {
+            input1 = parseInt(input1);
+            divisor = parseInt(divisor);
+            if (divisor === 0) {
+                answer = "Please enter a number greater than zero into the second field";
+            }
+            else {
+              answer = input1 / divisor;
+              answer = answer.toFixed(2);
+            }
+        }
+        return answer;
+    };
+
+    window.onload = function() {
+        $("submit").onclick = captureDisplay;
+    };
+
+    </script>
+
+</body>
+</html>
